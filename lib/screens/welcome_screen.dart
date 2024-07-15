@@ -24,16 +24,7 @@ class WelcomeScreen extends StatelessWidget {
           padding: EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Welcome to EPAM Cocktail!',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontFamily: 'EPAM2',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                ),
-              ),
+            children: [              
               Image.asset('assets/images/logo.png'),
               ElevatedButton(
                 onPressed: () {
