@@ -3,7 +3,6 @@ import 'package:flutter_application_1/models/models.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/screens.dart';
 
-
 class AddRecipeScreen extends StatefulWidget {
   const AddRecipeScreen({super.key});
 
@@ -17,6 +16,22 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   final _imageUrlController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _instructionsController = TextEditingController();
+
+  String? _validate(String value, String errorText) {
+    if (value == null || value.isEmpty) {
+      return errorText;
+    }
+    return null;
+  }
+
+  String? _validateUrl(String value, String errorText) {
+    if (value == null ||
+        value.isEmpty ||
+        (!value.startsWith('http://') && !value.startsWith('https://'))) {
+      return errorText;
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +65,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Recipe Name'),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a recipe name';
-                  }
-                  return null;
+                  _validate(_nameController.text, 'Please enter a recipe name');
                 },
               ),
               TextFormField(
@@ -63,14 +75,11 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
-                
                 controller: _imageUrlController,
                 decoration: const InputDecoration(labelText: 'Image URL'),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter an image URL';
-                  }
-                  return null;
+                  _validateUrl(
+                      _imageUrlController.text, 'Please enter a valid url');
                 },
               ),
               TextFormField(
@@ -80,14 +89,11 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
-                
                 controller: _descriptionController,
                 decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
+                  _validate(_descriptionController.text,
+                      'Please enter a recipe description');
                 },
               ),
               TextFormField(
@@ -100,18 +106,15 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 controller: _instructionsController,
                 decoration: const InputDecoration(labelText: 'Instructions'),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the recipe instrcuctions';
-                  }
-                  return null;
+                  _validate(_instructionsController.text,
+                      'Please enter recipe instructions');
                 },
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Add the new recipe to the list
-                    // For simplicity, we are not actually adding it to the list in this example
+                    //not adding to the list yet
                     Navigator.pop(context);
                   }
                 },
