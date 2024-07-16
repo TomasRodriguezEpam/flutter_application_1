@@ -16,19 +16,18 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   final _instructionsController = TextEditingController();
 
   String? _validate(String value, String errorText) {
-    if (value == null || value.isEmpty) {
+    if (value.isEmpty) {
       return errorText;
     }
-    return value;
+    return null;
   }
 
   String? _validateUrl(String value, String errorText) {
-    if (value == null ||
-        value.isEmpty ||
+    if (value.isEmpty ||
         (!value.startsWith('http://') && !value.startsWith('https://'))) {
       return errorText;
     }
-    return value;
+    return null;
   }
 
   @override
@@ -63,7 +62,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Recipe Name'),
                 validator: (value) {
-                  _validate(_nameController.text, 'Please enter a recipe name');
+                  return _validate(value ?? '', 'Please enter a recipe name');
                 },
               ),
               TextFormField(
@@ -76,8 +75,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 controller: _imageUrlController,
                 decoration: const InputDecoration(labelText: 'Image URL'),
                 validator: (value) {
-                  _validateUrl(
-                      _imageUrlController.text, 'Please enter a valid url');
+                  return _validateUrl(value ?? '', 'Please enter a valid URL');
                 },
               ),
               TextFormField(
@@ -90,8 +88,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 controller: _descriptionController,
                 decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) {
-                  _validate(_descriptionController.text,
-                      'Please enter a recipe description');
+                  return _validate(
+                      value ?? '', 'Please enter a recipe description');
                 },
               ),
               TextFormField(
@@ -104,17 +102,16 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 controller: _instructionsController,
                 decoration: const InputDecoration(labelText: 'Instructions'),
                 validator: (value) {
-                  _validate(_instructionsController.text,
-                      'Please enter recipe instructions');
+                  return _validate(
+                      value ?? '', 'Please enter recipe instructions');
                 },
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    //not adding to the list yet should add to list in further versions
+                    // Not adding to the list yet, should add to list in further versions
                     Navigator.pop(context);
-                    
                   }
                 },
                 child: const Text('Add Recipe'),
