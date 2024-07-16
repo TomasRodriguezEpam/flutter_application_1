@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/extensions.dart';
 
 class AddRecipeScreen extends StatefulWidget {
   const AddRecipeScreen({super.key});
@@ -29,17 +30,18 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     }
     return null;
   }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: context.colorScheme.primary,
         title: Text(
           'ADD RECIPE',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.background,
+            color: context.colorScheme.background,
             fontFamily: 'EPAM2',
             fontWeight: FontWeight.w700,
             fontSize: 20,
@@ -134,3 +136,4 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     super.dispose();
   }
 }
+

@@ -1,6 +1,12 @@
 import 'package:flutter_application_1/models/models.dart';
 
 class Constants {
+
+  
+
+
+
+
   static final List<Recipe> recipes = [
     Recipe(
       name: 'The Semantic Sunrise',

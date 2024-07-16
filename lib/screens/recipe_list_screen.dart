@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constants.dart';
 import 'package:flutter_application_1/screens/screens.dart';
+import 'package:flutter_application_1/extensions.dart';
 
 class RecipeListScreen extends StatelessWidget {
   const RecipeListScreen({super.key});
@@ -11,11 +12,11 @@ class RecipeListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: context.colorScheme.primary,
         title: Text(
           'EPAM Cocktail',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.background,
+            color: context.colorScheme.background,
             fontFamily: 'EPAM2',
             fontWeight: FontWeight.w700,
             fontSize: 20,

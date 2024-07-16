@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/models.dart';
-
+import 'package:flutter_application_1/extensions.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe;
@@ -12,11 +12,11 @@ class RecipeDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: context.colorScheme.primary,
         title: Text(
           'EPAM Cocktail',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.background,
+            color: context.colorScheme.background,
             fontFamily: 'EPAM2',
             fontWeight: FontWeight.w700,
             fontSize: 30,
