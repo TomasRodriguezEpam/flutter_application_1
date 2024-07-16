@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class AddRecipeScreen extends StatefulWidget {
   const AddRecipeScreen({super.key});
 
@@ -112,7 +111,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    //not adding to the list yet
+                    //not adding to the list yet should add to list in further versions
+                    dispose();
                     Navigator.pop(context);
                   }
                 },
@@ -123,5 +123,14 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _imageUrlController.dispose();
+    _descriptionController.dispose();
+    _instructionsController.dispose();
+    super.dispose();
   }
 }
