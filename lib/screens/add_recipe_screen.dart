@@ -19,7 +19,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     if (value == null || value.isEmpty) {
       return errorText;
     }
-    return null;
+    return value;
   }
 
   String? _validateUrl(String value, String errorText) {
@@ -28,9 +28,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         (!value.startsWith('http://') && !value.startsWith('https://'))) {
       return errorText;
     }
-    return null;
+    return value;
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +113,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     //not adding to the list yet should add to list in further versions
-                    dispose();
                     Navigator.pop(context);
+                    
                   }
                 },
                 child: const Text('Add Recipe'),
@@ -136,4 +135,3 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     super.dispose();
   }
 }
-

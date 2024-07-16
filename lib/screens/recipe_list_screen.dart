@@ -37,7 +37,7 @@ class RecipeListScreen extends StatelessWidget {
           final recipe = recipes[index];
           return Card(
             elevation: 20,
-            color: Theme.of(context).colorScheme.primary,
+            color: context.colorScheme.primary,
             child: InkWell(
               onTap: () {
                 Navigator.push(
