@@ -16,12 +16,23 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   final _nameController = TextEditingController();
   final _imageUrlController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _instructionsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Add Recipe'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          'ADD RECIPE',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.background,
+            fontFamily: 'EPAM2',
+            fontWeight: FontWeight.w700,
+            fontSize: 20,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,6 +41,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'EPAM2',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Recipe Name'),
                 validator: (value) {
@@ -40,6 +57,13 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 },
               ),
               TextFormField(
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'EPAM2',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+                
                 controller: _imageUrlController,
                 decoration: const InputDecoration(labelText: 'Image URL'),
                 validator: (value) {
@@ -50,11 +74,34 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 },
               ),
               TextFormField(
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'EPAM2',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+                
                 controller: _descriptionController,
                 decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'EPAM2',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+                controller: _instructionsController,
+                decoration: const InputDecoration(labelText: 'Instructions'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter the recipe instrcuctions';
                   }
                   return null;
                 },
