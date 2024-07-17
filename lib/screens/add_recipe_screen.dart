@@ -87,10 +87,8 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 ),
                 controller: _descriptionController,
                 decoration: const InputDecoration(labelText: 'Description'),
-                validator: (value) {
-                  return _validate(
-                      value ?? '', 'Please enter a recipe description');
-                },
+                validator: (value) =>
+                    _validateUrl(value ?? '', 'Please enter a valid URL'),
               ),
               TextFormField(
                 style: const TextStyle(
