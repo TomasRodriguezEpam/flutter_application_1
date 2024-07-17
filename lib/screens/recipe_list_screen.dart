@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constants.dart';
-import 'package:flutter_application_1/screens/screens.dart';
 import 'package:flutter_application_1/extensions.dart';
+import 'package:flutter_application_1/screens/screens.dart';
+
 
 class RecipeListScreen extends StatelessWidget {
   const RecipeListScreen({super.key});
@@ -56,7 +57,7 @@ class RecipeListScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                       width: double.infinity,
                       errorBuilder: (context, error, stackTrace) {
-                        return Icon(Icons.error);
+                        return const Icon(Icons.error);
                       },
                     ),
                   ),
@@ -67,17 +68,17 @@ class RecipeListScreen extends StatelessWidget {
                       children: [
                         Text(
                           recipe.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.orange,
                             fontFamily: 'EPAM2',
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           recipe.description,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'EPAM2',
                             fontWeight: FontWeight.w300,

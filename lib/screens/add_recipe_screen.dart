@@ -24,7 +24,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
 
   String? _validateUrl(String value, String errorText) {
     if (value.isEmpty ||
-        (!value.startsWith('http://') && !value.startsWith('https://'))) {
+        (!value.startsWith('http://') || !value.startsWith('https://'))) {
       return errorText;
     }
     return null;
