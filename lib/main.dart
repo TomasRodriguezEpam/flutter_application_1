@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
       ),
       home: const WelcomeScreen(),
       routes: {
-        '/recipes': (context) => const RecipeListScreen(),
-        '/addRecipe': (context) => const AddRecipeScreen(),
+        '/recipes': (context) => RecipeListScreen(),
+        '/addRecipe': (context) => AddRecipeScreen(),
       },
     );
   }

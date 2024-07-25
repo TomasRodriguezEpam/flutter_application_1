@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/extensions.dart';
+import 'package:flutter_application_1/models/recipe.dart';
+import 'package:flutter_application_1/repository/shared_preferences_recipe_repository.dart';
 
 class AddRecipeScreen extends StatefulWidget {
-  const AddRecipeScreen({super.key});
-
   @override
   _AddRecipeScreenState createState() => _AddRecipeScreenState();
 }
@@ -11,122 +10,73 @@ class AddRecipeScreen extends StatefulWidget {
 class _AddRecipeScreenState extends State<AddRecipeScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _imageUrlController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _instructionsController = TextEditingController();
-
-  String? _validate(String value, String errorText) {
-    if (value.isEmpty) {
-      return errorText;
-    }
-    return null;
-  }
-
-  String? _validateUrl(String value, String errorText) {
-    if (value.isEmpty ||
-        (!value.startsWith('http://') || !value.startsWith('https://'))) {
-      return errorText;
-    }
-    return null;
-  }
+  final SharedPreferencesRecipeRepository _repository =
+      SharedPreferencesRecipeRepository();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: context.colorScheme.primary,
-        title: Text(
-          'ADD RECIPE',
-          style: TextStyle(
-            color: context.colorScheme.background,
-            fontFamily: 'EPAM2',
-            fontWeight: FontWeight.w700,
-            fontSize: 20,
-          ),
-        ),
+        title: Text('Add Recipe'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
-            children: <Widget>[
+            children: [
               TextFormField(
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'EPAM2',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Recipe Name'),
+                decoration: InputDecoration(labelText: 'Name'),
                 validator: (value) {
-                  return _validate(value ?? '', 'Please enter a recipe name');
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a name';
+                  }
+                  return null;
                 },
               ),
               TextFormField(
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'EPAM2',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-                controller: _imageUrlController,
-                decoration: const InputDecoration(labelText: 'Image URL'),
-                validator: (value) {
-                  return _validateUrl(value ?? '', 'Please enter a valid URL');
-                },
-              ),
-              TextFormField(
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'EPAM2',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
                 controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
-                validator: (value) =>
-                    _validateUrl(value ?? '', 'Please enter a valid URL'),
-              ),
-              TextFormField(
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'EPAM2',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-                controller: _instructionsController,
-                decoration: const InputDecoration(labelText: 'Instructions'),
+                decoration: InputDecoration(labelText: 'Description'),
                 validator: (value) {
-                  return _validate(
-                      value ?? '', 'Please enter recipe instructions');
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a description';
+                  }
+                  return null;
                 },
               ),
-              const SizedBox(height: 16.0),
+              TextFormField(
+                controller: _instructionsController,
+                decoration: InputDecoration(labelText: 'Instructions'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter instructions';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    // Not adding to the list yet, should add to list in further versions
+                    final recipe = Recipe(
+                      name: _nameController.text,
+                      description: _descriptionController.text,
+                      instructions: _instructionsController.text,
+                      imageUrl: '', // Add image URL handling if needed
+                    );
+                    await _repository.addRecipe(recipe);
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Add Recipe'),
+                child: Text('Add Recipe'),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _imageUrlController.dispose();
-    _descriptionController.dispose();
-    _instructionsController.dispose();
-    super.dispose();
   }
 }

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/models.dart';
-import 'package:flutter_application_1/extensions.dart';
+import 'package:flutter_application_1/models/recipe.dart';
+import 'package:flutter_application_1/repository/shared_preferences_recipe_repository.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe;
+  final SharedPreferencesRecipeRepository _repository =
+      SharedPreferencesRecipeRepository();
 
-  const RecipeDetailScreen({super.key, required this.recipe});
+  RecipeDetailScreen({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: context.colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           'EPAM Cocktail',
           style: TextStyle(
-            color: context.colorScheme.background,
+            color: Theme.of(context).colorScheme.background,
             fontFamily: 'EPAM2',
             fontWeight: FontWeight.w700,
             fontSize: 30,
@@ -67,10 +69,11 @@ class RecipeDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                await _repository.deleteRecipe(recipe.name);
                 Navigator.pop(context);
               },
-              child: const Text('Back to Recipes'),
+              child: const Text('Delete Recipe'),
             ),
           ],
         ),
