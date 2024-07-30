@@ -76,3 +76,4 @@ flutter:
           style: normal
   assets:
     - assets/images/
+    - assets/recipes.json
