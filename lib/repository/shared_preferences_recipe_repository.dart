@@ -37,4 +37,9 @@ class SharedPreferencesRecipeRepository implements RecipeRepository {
     final recipesJson = jsonEncode(recipes.map((r) => r.toJson()).toList());
     await prefs.setString(_recipesKey, recipesJson);
   }
+
+  Future<void> clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 }

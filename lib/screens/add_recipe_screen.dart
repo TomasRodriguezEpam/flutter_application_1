@@ -11,6 +11,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _imageUrlController = TextEditingController();
   final _instructionsController = TextEditingController();
   final SharedPreferencesRecipeRepository _repository =
       SharedPreferencesRecipeRepository();
@@ -43,6 +44,18 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _descriptionController,
+                decoration: InputDecoration(labelText: 'Image URL'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid url';
+                  } else if (!RegExp(r'^(http|https)://').hasMatch(value)) {
+                    return 'URL must start with http:// or https://';
                   }
                   return null;
                 },
