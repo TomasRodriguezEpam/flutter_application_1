@@ -20,7 +20,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Recipe'),
+        title: const Text('Add Recipe'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,7 +30,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a name';
@@ -40,7 +40,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               ),
               TextFormField(
                 controller: _descriptionController,
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -49,12 +49,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 },
               ),
               TextFormField(
-                controller: _descriptionController,
-                decoration: InputDecoration(labelText: 'Image URL'),
+                controller: _imageUrlController,
+                decoration: const InputDecoration(labelText: 'Image URL'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a valid url';
-                  } else if (!RegExp(r'^(http|https)://').hasMatch(value)) {
+                  } else if (!RegExp('^(http|https)://').hasMatch(value)) {
                     return 'URL must start with http:// or https://';
                   }
                   return null;
@@ -62,7 +62,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               ),
               TextFormField(
                 controller: _instructionsController,
-                decoration: InputDecoration(labelText: 'Instructions'),
+                decoration: const InputDecoration(labelText: 'Instructions'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter instructions';
@@ -70,8 +70,9 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
+            
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     final recipe = Recipe(
@@ -81,10 +82,13 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       imageUrl: '', // Add image URL handling if needed
                     );
                     await _repository.addRecipe(recipe);
-                    Navigator.pop(context);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                    }
+                    
                   }
                 },
-                child: Text('Add Recipe'),
+                child: const Text('Add Recipe'),
               ),
             ],
           ),

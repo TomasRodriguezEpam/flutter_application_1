@@ -20,7 +20,7 @@ class SharedPreferencesRecipeRepository implements RecipeRepository {
     final prefs = await SharedPreferences.getInstance();
     final recipesJson = prefs.getString(_recipesKey);
     if (recipesJson != null) {
-      final List<dynamic> recipesList =
+      final recipesList =
           jsonDecode(recipesJson) as List<dynamic>;
       return recipesList
           .map((json) => Recipe.fromJson(json as Map<String, dynamic>))
